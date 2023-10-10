@@ -1,13 +1,18 @@
+import { useState } from 'react';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 import { ChakraProvider } from '@chakra-ui/react';
 
 import Navbar from './components/layout/Navbar';
 
 function App() {
+  const [ethAddress, setETHAddress] = useState('');
+
   return (
     <ChakraProvider>
       <HashRouter>
-        <Navbar />
+        <Navbar
+          ethAddress={ethAddress}
+          setETHAddress={setETHAddress} />
         <Routes>
           <Route
             path="/test"
