@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Container, Heading, InputGroup, Input, InputRightElement, Text } from '@chakra-ui/react';
+import { SearchIcon } from "@chakra-ui/icons";
 
 function Home() {
   const [search, setSearch] = useState("");
@@ -10,7 +11,7 @@ function Home() {
       <InputGroup bg='white' mt='4'>
         <Input placeholder='Search' value={search} onChange={(e) => setSearch(e.target.value)}/>
         <InputRightElement>
-          <Text mr="2" color="blue" fontWeight="bold">Find</Text>
+          <SearchIcon />
         </InputRightElement>
       </InputGroup>
     </Container>
