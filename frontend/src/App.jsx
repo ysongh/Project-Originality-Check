@@ -7,13 +7,15 @@ import Home from './pages/Home';
 
 function App() {
   const [ethAddress, setETHAddress] = useState('');
+  const [projectContract, setProjectContract] = useState(null);
 
   return (
     <ChakraProvider>
       <HashRouter>
         <Navbar
           ethAddress={ethAddress}
-          setETHAddress={setETHAddress} />
+          setETHAddress={setETHAddress}
+          setProjectContract={setCsetProjectContractontract} />
         <Routes>
           <Route
             path="/test"
