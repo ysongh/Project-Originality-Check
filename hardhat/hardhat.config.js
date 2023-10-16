@@ -8,3 +8,5 @@ module.exports = {
     cache: '../frontend/src/cache',
   }
 };
+
+// npx hardhat run --network localhost scripts/deploy.js
