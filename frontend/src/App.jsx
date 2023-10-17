@@ -29,7 +29,7 @@ function App() {
             element={<CreateProject projectContract={projectContract} />} />
           <Route
             path="/"
-            element={<Home />} />
+            element={<Home projectContract={projectContract} />} />
         </Routes>
       </HashRouter>
     </ChakraProvider>
