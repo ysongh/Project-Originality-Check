@@ -4,6 +4,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 
 import Navbar from './components/layout/Navbar';
 import Home from './pages/Home';
+import CreateProject from './pages/CreateProject.jsx';
 
 function App() {
   const [ethAddress, setETHAddress] = useState('');
@@ -15,7 +16,7 @@ function App() {
         <Navbar
           ethAddress={ethAddress}
           setETHAddress={setETHAddress}
-          setProjectContract={setCsetProjectContractontract} />
+          setProjectContract={setProjectContract} />
         <Routes>
           <Route
             path="/test"
@@ -23,6 +24,9 @@ function App() {
               <>
                 <h1>Test</h1>
               </>} />
+          <Route
+            path="/create-project"
+            element={<CreateProject projectContract={projectContract} />} />
           <Route
             path="/"
             element={<Home />} />
