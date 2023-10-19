@@ -1,9 +1,14 @@
 require('dotenv').config();
 require("@nomicfoundation/hardhat-toolbox");
+require("@tableland/hardhat");
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
   solidity: "0.8.20",
+  localTableland: {
+    silent: false,
+    verbose: false,
+  },
   networks: {
     // npx hardhat run --network scrollSepolia scripts/deploy.js
     scrollSepolia: {
