@@ -12,7 +12,15 @@ async function main() {
   await contract.waitForDeployment();
 
   console.log(
-    `Contract deployed to ${contract.target}`
+    `Project Contract deployed to ${contract.target}`
+  );
+
+  const contract2 = await hre.ethers.deployContract("ProjectNFT");
+
+  await contract2.waitForDeployment();
+
+  console.log(
+    `NFT Contract deployed to ${contract2.target}`
   );
 }
 
