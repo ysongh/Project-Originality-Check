@@ -80,4 +80,8 @@ contract ProjectOriginalityCheck is ERC721Holder {
   function getPosts() external view returns (Project[] memory) {
     return projects;
   }
+
+  function getTableName() external view returns (string memory) {
+    return SQLHelpers.toNameFromId(_TABLE_PREFIX, tableId);
+  }
 }

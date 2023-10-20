@@ -15,6 +15,11 @@ async function main() {
     `Project Contract deployed to ${contract.target}`
   );
 
+  const tablename = await contract.getTableName();
+  console.log(
+    `Tablename is  ${tablename}`
+  );
+
   const contract2 = await hre.ethers.deployContract("ProjectNFT");
 
   await contract2.waitForDeployment();
