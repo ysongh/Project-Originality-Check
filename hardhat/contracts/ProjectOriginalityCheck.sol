@@ -25,7 +25,8 @@ contract ProjectOriginalityCheck is ERC721Holder {
       address(this),
       SQLHelpers.toCreateFromSchema(
         "id integer primary key," // Notice the trailing comma
-        "val text",
+        "title text,"
+        "description text",
         _TABLE_PREFIX
       )
     );
@@ -38,9 +39,11 @@ contract ProjectOriginalityCheck is ERC721Holder {
         tableId,
         "id,val",
         string.concat(
-          Strings.toString(dataCount), // Convert to a string
+          Strings.toString(dataCount),
           ",",
-          SQLHelpers.quote("Test Tables") // Wrap strings in single quotes with the `quote` method
+          SQLHelpers.quote("Test"),
+          ",",
+          SQLHelpers.quote("Testing")
         )
       )
     );
@@ -48,18 +51,20 @@ contract ProjectOriginalityCheck is ERC721Holder {
     dataCount++;
   }
 
-  function insertProject(string memory val) public payable {
+  function insertProject(string memory title, string memory description) public payable {
     TablelandDeployments.get().mutate(
       address(this),
       tableId,
       SQLHelpers.toInsert(
       _TABLE_PREFIX,
       tableId,
-      "id,val",
+      "id,title,description",
       string.concat(
-          Strings.toString(dataCount), // Convert to a string
+          Strings.toString(dataCount),
           ",",
-          SQLHelpers.quote(val) // Wrap strings in single quotes
+          SQLHelpers.quote(title),
+          ",",
+          SQLHelpers.quote(description)
         )
       )
     );
