@@ -10,7 +10,7 @@ module.exports = {
     verbose: false,
   },
   networks: {
-    // npx hardhat run --network scrollSepolia scripts/deploy.js
+    // npx hardhat run --network scrollSepolia scripts/deploy2.js
     scrollSepolia: {
       url: "https://sepolia-rpc.scroll.io/" || "",
       accounts:
