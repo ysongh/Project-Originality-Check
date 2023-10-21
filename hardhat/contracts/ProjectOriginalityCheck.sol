@@ -37,7 +37,7 @@ contract ProjectOriginalityCheck is ERC721Holder {
       SQLHelpers.toInsert(
         _TABLE_PREFIX,
         tableId,
-        "id,val",
+        "id,title,description",
         string.concat(
           Strings.toString(dataCount),
           ",",
