@@ -26,7 +26,8 @@ contract ProjectOriginalityCheck is ERC721Holder {
       SQLHelpers.toCreateFromSchema(
         "id integer primary key," // Notice the trailing comma
         "title text,"
-        "description text",
+        "description text,"
+        "date_created integer",
         _TABLE_PREFIX
       )
     );
@@ -37,13 +38,15 @@ contract ProjectOriginalityCheck is ERC721Holder {
       SQLHelpers.toInsert(
         _TABLE_PREFIX,
         tableId,
-        "id,title,description",
+        "id,title,description,date_created",
         string.concat(
           Strings.toString(dataCount),
           ",",
           SQLHelpers.quote("Test"),
           ",",
-          SQLHelpers.quote("Testing")
+          SQLHelpers.quote("Testing"),
+          ",",
+          SQLHelpers.quote(Strings.toString(block.timestamp))
         )
       )
     );
@@ -58,13 +61,15 @@ contract ProjectOriginalityCheck is ERC721Holder {
       SQLHelpers.toInsert(
       _TABLE_PREFIX,
       tableId,
-      "id,title,description",
+      "id,title,description,date_created",
       string.concat(
           Strings.toString(dataCount),
           ",",
           SQLHelpers.quote(title),
           ",",
-          SQLHelpers.quote(description)
+          SQLHelpers.quote(description),
+          ",",
+          SQLHelpers.quote(Strings.toString(block.timestamp))
         )
       )
     );
