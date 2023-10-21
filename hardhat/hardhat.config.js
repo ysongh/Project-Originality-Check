@@ -16,6 +16,12 @@ module.exports = {
       accounts:
         process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     },
+    // npx hardhat run --network calibration scripts/deploy.js
+    "calibration": {
+      url: "https://api.calibration.node.glif.io/rpc/v1",
+      accounts:
+        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+    }
   },
   paths: {
     artifacts: '../frontend/src/artifacts',
