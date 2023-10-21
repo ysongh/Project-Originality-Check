@@ -1,13 +1,5 @@
-# Sample Hardhat Project
+# Contracts
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a script that deploys that contract.
-
-Try running some of the following tasks:
-
-```shell
-npx hardhat help
-npx hardhat test
-REPORT_GAS=true npx hardhat test
-npx hardhat node
-npx hardhat run scripts/deploy.js
-```
+## Scroll Testnet
+- ProjectOriginalityCheck => https://sepolia-blockscout.scroll.io/address/0xFda2FCAB7c8c2FDB3Ef69C37Ee94f1e7A94f0eD3/contracts#address-tabs
+- ProjectNFT => https://sepolia-blockscout.scroll.io/address/0x8ec0c378c238D16487c845991Bfd3FD501bDEaF5/contracts#address-tabs
