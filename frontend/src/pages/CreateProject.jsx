@@ -8,6 +8,7 @@ function CreateProject({ projectContract, nftContract }) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [url, setUrl] = useState('');
+  const [tag, setTag] = useState('');
   const [loading, setLoading] = useState(false);
   const [loadingText, setLoadingText] = useState("");
 
@@ -16,7 +17,7 @@ function CreateProject({ projectContract, nftContract }) {
       setLoadingText("Creating Project...")
       setLoading(true);
       console.log(title, description, url);
-      const transaction = await projectContract.insertProject(title, description);
+      const transaction = await projectContract.insertProject(title, description, url, tag);
       const tx = await transaction.wait();
       console.log(tx);
       setLoadingText("Minting NFT...")
@@ -46,6 +47,10 @@ function CreateProject({ projectContract, nftContract }) {
           <FormControl mb='3'>
             <FormLabel htmlFor='URL'>URL</FormLabel>
             <Input id='URL' onChange={(e) => setUrl(e.target.value)}/>
+          </FormControl>
+          <FormControl mb='3'>
+            <FormLabel htmlFor='tag'>Tag</FormLabel>
+            <Input id='tag' onChange={(e) => setTag(e.target.value)}/>
           </FormControl>
           <ButtonGroup spacing='6'>
             <Button colorScheme='orange' onClick={handleSubmit} isLoading={loading} loadingText={loadingText}>

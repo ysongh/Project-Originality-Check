@@ -41,8 +41,10 @@ function Home({ projectContract }) {
         {projects.map(p => (
           <Box key={p.id} borderWidth='1px' borderRadius='lg' borderColor='green' overflow='hidden' p='5' mt='5'>
             <Heading textAlign="center" fontSize="3xl" mb="4">{p.title}</Heading>
-            <Text textAlign="center" fontSize="xl" mb="4">{p.description}</Text>
-            <Text textAlign="center" fontSize="xl" mb="4">{p.date_created}</Text>
+            <Text textAlign="center" fontSize="xl">{p.description}</Text>
+            <Text textAlign="center" fontSize="xl">{p.date_created}</Text>
+            <Text textAlign="center" fontSize="xl">{p.url}</Text>
+            <Text textAlign="center" fontSize="xl">{p.tag}</Text>
             <br />
             <Button mt="4" onClick={() => navigate(`/`)}>View</Button>
           </Box>

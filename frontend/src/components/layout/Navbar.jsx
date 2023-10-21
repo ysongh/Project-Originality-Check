@@ -5,8 +5,8 @@ import { ethers } from 'ethers';
 import ProjectOriginalityCheck from "../../artifacts/contracts/ProjectOriginalityCheck.sol/ProjectOriginalityCheck.json";
 import ProjectNFT from "../../artifacts/contracts/ProjectNFT.sol/ProjectNFT.json";
 
-const LOCAL_PROJECT_CONTRACT_ADDRESS = "0x0165878A594ca255338adfa4d48449f69242Eb8F";
-const LOCAL_PROJECT_NFT_CONTRACT_ADDRESS = "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853";
+const LOCAL_PROJECT_CONTRACT_ADDRESS = "0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6";
+const LOCAL_PROJECT_NFT_CONTRACT_ADDRESS = "0x8A791620dd6260079BF849Dc5567aDC3F2FdC318";
 
 function Navbar({ ethAddress, setETHAddress, setProjectContract, setnftContract }) {
   const connectMetamask = async () => {
