@@ -3,10 +3,12 @@ import { Container, Box, Flex, Heading, Spacer, Button, Link } from '@chakra-ui/
 import { ethers } from 'ethers';
 
 import ProjectOriginalityCheck from "../../artifacts/contracts/ProjectOriginalityCheck.sol/ProjectOriginalityCheck.json";
+import ProjectNFT from "../../artifacts/contracts/ProjectNFT.sol/ProjectNFT.json";
 
-const LOCAL_PROJECT_CONTRACT_ADDRESS = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+const LOCAL_PROJECT_CONTRACT_ADDRESS = "0x0165878A594ca255338adfa4d48449f69242Eb8F";
+const LOCAL_PROJECT_NFT_CONTRACT_ADDRESS = "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853";
 
-function Navbar({ ethAddress, setETHAddress, setProjectContract }) {
+function Navbar({ ethAddress, setETHAddress, setProjectContract, setnftContract }) {
   const connectMetamask = async () => {
     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
     setETHAddress(accounts[0]);
@@ -16,6 +18,9 @@ function Navbar({ ethAddress, setETHAddress, setProjectContract }) {
 
     const contract1 = new ethers.Contract(LOCAL_PROJECT_CONTRACT_ADDRESS, ProjectOriginalityCheck.abi, signer);
     setProjectContract(contract1);
+
+    const contract2 = new ethers.Contract(LOCAL_PROJECT_NFT_CONTRACT_ADDRESS, ProjectNFT.abi, signer);
+    setnftContract(contract2)
   }
 
   return (

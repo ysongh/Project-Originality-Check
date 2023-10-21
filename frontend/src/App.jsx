@@ -9,6 +9,7 @@ import CreateProject from './pages/CreateProject.jsx';
 function App() {
   const [ethAddress, setETHAddress] = useState('');
   const [projectContract, setProjectContract] = useState(null);
+  const [nftContract, setnftContract] = useState(null);
 
   return (
     <ChakraProvider>
@@ -16,7 +17,8 @@ function App() {
         <Navbar
           ethAddress={ethAddress}
           setETHAddress={setETHAddress}
-          setProjectContract={setProjectContract} />
+          setProjectContract={setProjectContract}
+          setnftContract={setnftContract} />
         <Routes>
           <Route
             path="/test"
@@ -26,7 +28,7 @@ function App() {
               </>} />
           <Route
             path="/create-project"
-            element={<CreateProject projectContract={projectContract} />} />
+            element={<CreateProject projectContract={projectContract} nftContract={nftContract} />} />
           <Route
             path="/"
             element={<Home projectContract={projectContract} />} />

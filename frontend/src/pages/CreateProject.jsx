@@ -1,24 +1,32 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FormControl, FormLabel, Box, ButtonGroup, Spinner, Input, Heading, Button } from '@chakra-ui/react';
+import { FormControl, FormLabel, Box, ButtonGroup, Input, Heading, Button } from '@chakra-ui/react';
 
-function CreateProject({ projectContract }) {
+function CreateProject({ projectContract, nftContract }) {
   const router = useNavigate();
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [url, setUrl] = useState('');
   const [loading, setLoading] = useState(false);
+  const [loadingText, setLoadingText] = useState("");
 
   const handleSubmit = async () => {
     try{
+      setLoadingText("Creating Project...")
+      setLoading(true);
       console.log(title, description, url);
-      const transaction = await projectContract.addProject(url);
+      const transaction = await projectContract.insertProject(title, description);
       const tx = await transaction.wait();
       console.log(tx);
+      setLoadingText("Minting NFT...")
+      const transaction1 = await nftContract.mintProject(url);
+      const tx1 = await transaction1.wait();
+      console.log(tx1);
+      setLoading(false);
     } catch(error) {
-     console.error(error);
-     setLoading(false);
+      console.error(error);
+      setLoading(false);
     }  
   }
 
@@ -39,15 +47,12 @@ function CreateProject({ projectContract }) {
             <FormLabel htmlFor='URL'>URL</FormLabel>
             <Input id='URL' onChange={(e) => setUrl(e.target.value)}/>
           </FormControl>
-          {loading
-            ? <Spinner color='orange' />
-            : <ButtonGroup spacing='6'>
-                <Button colorScheme='orange' onClick={handleSubmit}>
-                  Create
-                </Button>
-                <Button onClick={() => router.push('/')}>Cancel</Button>
-              </ButtonGroup>
-          }
+          <ButtonGroup spacing='6'>
+            <Button colorScheme='orange' onClick={handleSubmit} isLoading={loading} loadingText={loadingText}>
+              Create
+            </Button>
+            <Button onClick={() => router.push('/')}>Cancel</Button>
+          </ButtonGroup>
         </Box>
       </center>
     </div>
