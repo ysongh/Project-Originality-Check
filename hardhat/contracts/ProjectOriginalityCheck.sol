@@ -35,32 +35,32 @@ contract ProjectOriginalityCheck is ERC721Holder {
       )
     );
 
-    TablelandDeployments.get().mutate(
-      address(this),
-      tableId,
-      SQLHelpers.toInsert(
-        _TABLE_PREFIX,
-        tableId,
-        "id,title,description,url,image_url,tag,date_created",
-        string.concat(
-          Strings.toString(dataCount),
-          ",",
-          SQLHelpers.quote("Test"),
-          ",",
-          SQLHelpers.quote("Testing"),
-          ",",
-          SQLHelpers.quote("test123.com"),
-          ",",
-          SQLHelpers.quote("https://bafybeibmb3l3fnox5wdfvta4tkbnue5smpgkr7fbg3otoaxtu7hr2rareq.ipfs.dweb.link/Logo%208%20(21).png"),
-          ",",
-          SQLHelpers.quote("React"),
-          ",",
-          SQLHelpers.quote(Strings.toString(block.timestamp))
-        )
-      )
-    );
+    // TablelandDeployments.get().mutate(
+    //   address(this),
+    //   tableId,
+    //   SQLHelpers.toInsert(
+    //     _TABLE_PREFIX,
+    //     tableId,
+    //     "id,title,description,url,image_url,tag,date_created",
+    //     string.concat(
+    //       Strings.toString(dataCount),
+    //       ",",
+    //       SQLHelpers.quote("Test"),
+    //       ",",
+    //       SQLHelpers.quote("Testing"),
+    //       ",",
+    //       SQLHelpers.quote("test123.com"),
+    //       ",",
+    //       SQLHelpers.quote("https://bafybeibmb3l3fnox5wdfvta4tkbnue5smpgkr7fbg3otoaxtu7hr2rareq.ipfs.dweb.link/Logo%208%20(21).png"),
+    //       ",",
+    //       SQLHelpers.quote("React"),
+    //       ",",
+    //       SQLHelpers.quote(Strings.toString(block.timestamp))
+    //     )
+    //   )
+    // );
 
-    dataCount++;
+    // dataCount++;
   }
 
   function insertProject(string memory title, string memory description, string memory url, string memory imageurl, string memory tag) public payable {

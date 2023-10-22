@@ -29,12 +29,11 @@ function Navbar({ ethAddress, setETHAddress, setProjectContract, setnftContract 
         <Flex minWidth='max-content' alignItems='center' gap='2'>
           <Box mr="4">
             <Link as={ReactLink} to="/">
-              <Heading color="green" mt="3" mb="5">Project Originality Check</Heading>
+              <Heading color="green" mt="3" mb="5">Searchable Project</Heading>
             </Link>
           </Box>
           <Link as={ReactLink} to="/">Home</Link>
           <Link as={ReactLink} to="/create-project">Add Project</Link>
-          <Link as={ReactLink} to="/test">Test</Link>
           <Spacer />
           <Button onClick={connectMetamask}>
             {ethAddress ? ethAddress.slice(0, 5) + "..." + ethAddress.slice(37, 42) : 'Connect Wallet'}

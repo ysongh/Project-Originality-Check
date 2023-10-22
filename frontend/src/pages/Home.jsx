@@ -33,7 +33,15 @@ function Home({ projectContract }) {
 
   return (
     <Container maxW='1200px'>
-      <Heading>Find Projects</Heading>
+      <Text fontWeight="bold">Find Projects By Name</Text>
+      <InputGroup bg='white' mt='4'>
+        <Input placeholder='Search by Tag' value={search} onChange={(e) => setSearch(e.target.value)}/>
+        <InputRightElement onClick={getProjectsByTag}>
+          <SearchIcon />
+        </InputRightElement>
+      </InputGroup>
+
+      <Text fontWeight="bold" mt="2">Find Projects By Tags</Text>
       <InputGroup bg='white' mt='4'>
         <Input placeholder='Search by Tag' value={search} onChange={(e) => setSearch(e.target.value)}/>
         <InputRightElement onClick={getProjectsByTag}>
@@ -47,11 +55,16 @@ function Home({ projectContract }) {
             <Image src={p.image_url} />
             <Heading textAlign="center" fontSize="3xl" mb="4">{p.title}</Heading>
             <Text textAlign="center" fontSize="xl">{p.description}</Text>
-            <Text textAlign="center" fontSize="xl">{p.date_created}</Text>
-            <Text textAlign="center" fontSize="xl">{p.url}</Text>
+            {/* <Text textAlign="center" fontSize="xl">{p.date_created}</Text> */}
+            {/* <Text textAlign="center" fontSize="xl">{p.url}</Text> */}
             <Text textAlign="center" fontSize="xl">{p.tag}</Text>
             <br />
-            <Button mt="4" onClick={() => navigate(`/`)}>View</Button>
+            <Button mt="4" width="100%" bg="green.300" onClick={() => navigate(`/`)}>
+              Github
+            </Button>
+            <Button mt="4" width="100%" onClick={() => navigate(`/`)}>
+              View
+            </Button>
           </Box>
         ))}
       </SimpleGrid>
