@@ -7,7 +7,7 @@
 const hre = require("hardhat");
 
 async function main() {
-  const contract = await hre.ethers.deployContract("ProjectOriginalityCheck");
+  const contract = await hre.ethers.deployContract("ProjectOriginalityCheck", { gasLimit: "0x1000000" });
 
   await contract.waitForDeployment();
 

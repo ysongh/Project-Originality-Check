@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FormControl, FormLabel, Box, ButtonGroup, Input, Heading, Button } from '@chakra-ui/react';
+import { NFTStorage, File } from 'nft.storage';
+
+import { NFTSTORAGE_APIKEY } from "../keys";
+
+const client = new NFTStorage({ token: NFTSTORAGE_APIKEY });
 
 function CreateProject({ projectContract, nftContract }) {
   const router = useNavigate();
@@ -9,19 +14,38 @@ function CreateProject({ projectContract, nftContract }) {
   const [description, setDescription] = useState('');
   const [url, setUrl] = useState('');
   const [tag, setTag] = useState('');
+  const [image, setImage] = useState('');
+  const [cidurl, setcidurl] = useState('');
   const [loading, setLoading] = useState(false);
   const [loadingText, setLoadingText] = useState("");
 
+  const handleUpload = event => {
+    const file = event.target.files[0];
+    console.log(file);
+    setImage(file);
+  }
+
   const handleSubmit = async () => {
     try{
-      setLoadingText("Creating Project...")
       setLoading(true);
+      setLoadingText("Uploading Data to IPFS...")
+      const imageFile = new File([ image ], image.name, { type: image.type });
+      const metadata = await client.store({
+          name: title,
+          description: description,
+          image: imageFile
+      });
+
+      console.log(metadata);
+      setcidurl(metadata.url);
+
+      setLoadingText("Creating Project...")
       console.log(title, description, url);
       const transaction = await projectContract.insertProject(title, description, url, tag);
       const tx = await transaction.wait();
       console.log(tx);
       setLoadingText("Minting NFT...")
-      const transaction1 = await nftContract.mintProject(url);
+      const transaction1 = await nftContract.mintProject(cidurl);
       const tx1 = await transaction1.wait();
       console.log(tx1);
       setLoading(false);
@@ -49,6 +73,10 @@ function CreateProject({ projectContract, nftContract }) {
             <Input id='URL' onChange={(e) => setUrl(e.target.value)}/>
           </FormControl>
           <FormControl mb='3'>
+            <FormLabel htmlFor='description'>Upload Cover Photo</FormLabel>
+            <input type='file' id='photo' onChange={handleUpload}/>
+          </FormControl>
+          <FormControl mb='3'>
             <FormLabel htmlFor='tag'>Tag</FormLabel>
             <Input id='tag' onChange={(e) => setTag(e.target.value)}/>
           </FormControl>
@@ -58,6 +86,7 @@ function CreateProject({ projectContract, nftContract }) {
             </Button>
             <Button onClick={() => router.push('/')}>Cancel</Button>
           </ButtonGroup>
+          <p>{cidurl}</p>
         </Box>
       </center>
     </div>

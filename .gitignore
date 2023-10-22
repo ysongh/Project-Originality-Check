@@ -15,6 +15,7 @@ dist-ssr
 *.local
 pnpm-lock.yaml
 .env
+keys.js
 
 # Editor directories and files
 .vscode/*
