@@ -28,6 +28,7 @@ contract ProjectOriginalityCheck is ERC721Holder {
         "title text,"
         "description text,"
         "url text,"
+        "image_url text,"
         "tag text,"
         "date_created integer",
         _TABLE_PREFIX
@@ -40,7 +41,7 @@ contract ProjectOriginalityCheck is ERC721Holder {
       SQLHelpers.toInsert(
         _TABLE_PREFIX,
         tableId,
-        "id,title,description,url,tag,date_created",
+        "id,title,description,url,image_url,tag,date_created",
         string.concat(
           Strings.toString(dataCount),
           ",",
@@ -49,6 +50,8 @@ contract ProjectOriginalityCheck is ERC721Holder {
           SQLHelpers.quote("Testing"),
           ",",
           SQLHelpers.quote("test123.com"),
+          ",",
+          SQLHelpers.quote("https://bafybeibmb3l3fnox5wdfvta4tkbnue5smpgkr7fbg3otoaxtu7hr2rareq.ipfs.dweb.link/Logo%208%20(21).png"),
           ",",
           SQLHelpers.quote("React"),
           ",",
@@ -60,14 +63,14 @@ contract ProjectOriginalityCheck is ERC721Holder {
     dataCount++;
   }
 
-  function insertProject(string memory title, string memory description, string memory url, string memory tag) public payable {
+  function insertProject(string memory title, string memory description, string memory url, string memory imageurl, string memory tag) public payable {
     TablelandDeployments.get().mutate(
       address(this),
       tableId,
       SQLHelpers.toInsert(
       _TABLE_PREFIX,
       tableId,
-      "id,title,description,url,tag,date_created",
+      "id,title,description,url,image_url,tag,date_created",
       string.concat(
           Strings.toString(dataCount),
           ",",
@@ -76,6 +79,8 @@ contract ProjectOriginalityCheck is ERC721Holder {
           SQLHelpers.quote(description),
           ",",
           SQLHelpers.quote(url),
+          ",",
+          SQLHelpers.quote(imageurl),
           ",",
           SQLHelpers.quote(tag),
           ",",

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Container, Heading, InputGroup, Input, InputRightElement, Text, SimpleGrid, Box, Button  } from '@chakra-ui/react';
+import { Container, Heading, InputGroup, Input, InputRightElement, Text, Image, SimpleGrid, Box, Button  } from '@chakra-ui/react';
 import { SearchIcon } from "@chakra-ui/icons";
 
 import { getProjectsFromTableland, getProjectsByTagFromTableland } from "../utils/Tableland";
@@ -44,6 +44,7 @@ function Home({ projectContract }) {
       <SimpleGrid minChildWidth='300px' spacing='40px'>
         {projects.map(p => (
           <Box key={p.id} borderWidth='1px' borderRadius='lg' borderColor='green' overflow='hidden' p='5' mt='5'>
+            <Image src={p.image_url} />
             <Heading textAlign="center" fontSize="3xl" mb="4">{p.title}</Heading>
             <Text textAlign="center" fontSize="xl">{p.description}</Text>
             <Text textAlign="center" fontSize="xl">{p.date_created}</Text>

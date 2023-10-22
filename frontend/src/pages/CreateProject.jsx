@@ -37,11 +37,13 @@ function CreateProject({ projectContract, nftContract }) {
       });
 
       console.log(metadata);
+      const arr = metadata.data.image.pathname.split("/");
+      const imageURL = `https://${arr[2]}.ipfs.dweb.link/${arr[3]}`;
       setcidurl(metadata.url);
 
       setLoadingText("Creating Project...")
       console.log(title, description, url);
-      const transaction = await projectContract.insertProject(title, description, url, tag);
+      const transaction = await projectContract.insertProject(title, description, url, imageURL, tag);
       const tx = await transaction.wait();
       console.log(tx);
       setLoadingText("Minting NFT...")
