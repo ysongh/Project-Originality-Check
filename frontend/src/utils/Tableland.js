@@ -22,3 +22,13 @@ export const getProjectsByTagFromTableland = async (tag) => {
     return [];
   }
 }
+
+export const getProjectsByTitleFromTableland = async (title) => {
+  try {
+    const { results } = await db.prepare(`SELECT * FROM ${tableName} WHERE title LIKE '%${title}%';`).all();
+    return results;
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+}

@@ -2,10 +2,11 @@ import { useState, useEffect } from "react";
 import { Container, Heading, InputGroup, Input, InputRightElement, Text, Image, SimpleGrid, Box, Button  } from '@chakra-ui/react';
 import { SearchIcon } from "@chakra-ui/icons";
 
-import { getProjectsFromTableland, getProjectsByTagFromTableland } from "../utils/Tableland";
+import { getProjectsFromTableland, getProjectsByTagFromTableland, getProjectsByTitleFromTableland } from "../utils/Tableland";
 
 function Home({ projectContract }) {
   const [search, setSearch] = useState("");
+  const [searchTitle, setSearchTitle] = useState("");
   const [projects, setProjects] = useState([]);
 
   // useEffect(() => {
@@ -31,12 +32,17 @@ function Home({ projectContract }) {
     setProjects(newProjects);
   }
 
+  const getProjectsByTitle = async () => {
+    const newProjects = await getProjectsByTitleFromTableland(searchTitle);
+    setProjects(newProjects);
+  }
+
   return (
     <Container maxW='1200px'>
-      <Text fontWeight="bold">Find Projects By Name</Text>
+      <Text fontWeight="bold">Find Projects By Title</Text>
       <InputGroup bg='white' mt='4'>
-        <Input placeholder='Search by Tag' value={search} onChange={(e) => setSearch(e.target.value)}/>
-        <InputRightElement onClick={getProjectsByTag}>
+        <Input placeholder='Search by Tag' value={searchTitle} onChange={(e) => setSearchTitle(e.target.value)}/>
+        <InputRightElement onClick={getProjectsByTitle}>
           <SearchIcon />
         </InputRightElement>
       </InputGroup>
