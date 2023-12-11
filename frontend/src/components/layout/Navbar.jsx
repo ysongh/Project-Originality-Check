@@ -24,7 +24,7 @@ function Navbar({ ethAddress, setETHAddress, setProjectContract, setnftContract 
   }
 
   return (
-    <Box p={2}>
+    <Box bg="orange.100">
       <Container maxW='1200px'>
         <Flex minWidth='max-content' alignItems='center' gap='2'>
           <Box mr="4">
