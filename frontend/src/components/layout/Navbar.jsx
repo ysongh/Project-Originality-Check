@@ -1,5 +1,6 @@
+import { useState } from 'react';
 import { Link as ReactLink } from 'react-router-dom';
-import { Container, Box, Flex, Heading, Spacer, Button, Link } from '@chakra-ui/react';
+import { Container, Box, Flex, Heading, Spacer, Badge, Button, Link } from '@chakra-ui/react';
 import { ethers } from 'ethers';
 
 import ProjectOriginalityCheck from "../../artifacts/contracts/ProjectOriginalityCheck.sol/ProjectOriginalityCheck.json";
@@ -9,10 +10,17 @@ const LOCAL_PROJECT_CONTRACT_ADDRESS = "0xDc64a140Aa3E981100a9becA4E685f962f0cF6
 const LOCAL_PROJECT_NFT_CONTRACT_ADDRESS = "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707";
 
 function Navbar({ ethAddress, setETHAddress, setProjectContract, setnftContract }) {
+  const [networkName, setnetworkName] = useState("");
+
   const connectMetamask = async () => {
     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
     setETHAddress(accounts[0]);
     const provider = new ethers.providers.Web3Provider(window.ethereum);
+
+    const { name, chainId } = await provider.getNetwork();
+    console.log(name, chainId);
+    setnetworkName(name);
+
     const signer = provider.getSigner();
     console.log(signer);
 
@@ -35,6 +43,7 @@ function Navbar({ ethAddress, setETHAddress, setProjectContract, setnftContract 
           <Link as={ReactLink} to="/">Home</Link>
           <Link as={ReactLink} to="/create-project">Add Project</Link>
           <Spacer />
+          {networkName && <p><Badge bgColor="#ff99fe" fontSize='.9rem'>{networkName}</Badge></p>}
           <Button onClick={connectMetamask}>
             {ethAddress ? ethAddress.slice(0, 5) + "..." + ethAddress.slice(37, 42) : 'Connect Wallet'}
           </Button>
