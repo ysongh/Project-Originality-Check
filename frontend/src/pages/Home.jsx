@@ -39,8 +39,8 @@ function Home({ projectContract }) {
 
   return (
     <Container maxW='1200px'>
-      <Text fontWeight="bold">Find Projects By Title</Text>
-      <InputGroup bg='white' mt='4'>
+      <Text fontWeight="bold" mt="3">Find Projects By Title</Text>
+      <InputGroup bg='white' mb='5'>
         <Input placeholder='Search by Tag' value={searchTitle} onChange={(e) => setSearchTitle(e.target.value)}/>
         <InputRightElement onClick={getProjectsByTitle}>
           <SearchIcon />
@@ -48,7 +48,7 @@ function Home({ projectContract }) {
       </InputGroup>
 
       <Text fontWeight="bold" mt="2">Find Projects By Tags</Text>
-      <InputGroup bg='white' mt='4'>
+      <InputGroup bg='white'>
         <Input placeholder='Search by Tag' value={search} onChange={(e) => setSearch(e.target.value)}/>
         <InputRightElement onClick={getProjectsByTag}>
           <SearchIcon />
