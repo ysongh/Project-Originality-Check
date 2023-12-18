@@ -18,7 +18,9 @@ function Navbar({ ethAddress, setETHAddress, setProjectContract, setnftContract 
   const connectMetamask = async () => {
     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
     setETHAddress(accounts[0]);
-    //const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const etherprovider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = etherprovider.getSigner();
+    console.log(signer);
 
     // Initialize the sdk with the address of the EAS Schema contract address
     const eas = new EAS(EASContractAddress);
@@ -30,13 +32,14 @@ function Navbar({ ethAddress, setETHAddress, setProjectContract, setnftContract 
 
     // Connects an ethers style provider/signingProvider to perform read/write functions.
     // MUST be a signer to do write operations!
-    eas.connect(provider);
+    eas.connect(signer);
 
     const { name, chainId } = await provider.getNetwork();
     console.log(name, chainId);
     setnetworkName(name);
 
     getAttestation(eas);
+    createOnchainAttestations(eas);
 
     // const contract1 = new ethers.Contract(LOCAL_PROJECT_CONTRACT_ADDRESS, ProjectOriginalityCheck.abi, signer);
     // setProjectContract(contract1);
@@ -51,6 +54,30 @@ function Navbar({ ethAddress, setETHAddress, setProjectContract, setnftContract 
     const attestation = await eas.getAttestation(uid);
 
     console.log(attestation);
+  }
+
+  const createOnchainAttestations = async (eas) => {
+    const schemaEncoder = new SchemaEncoder("uint256 eventId, uint8 voteIndex");
+    const encodedData = schemaEncoder.encodeData([
+      { name: "eventId", value: 1, type: "uint256" },
+      { name: "voteIndex", value: 1, type: "uint8" },
+    ]);
+    
+    const schemaUID = "0xb16fa048b0d597f5a821747eba64efa4762ee5143e9a80600d0005386edfc995";
+    
+    const tx = await eas.attest({
+      schema: schemaUID,
+      data: {
+        recipient: "0xaa90e02e88047232288D01Fe04d846e8A4Cc88dd",
+        expirationTime: 0,
+        revocable: true, // Be aware that if your schema is not revocable, this MUST be false
+        data: encodedData,
+      },
+    });
+    
+    const newAttestationUID = await tx.wait();
+    
+    console.log("New attestation UID:", newAttestationUID);
   }
 
   return (
