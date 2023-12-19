@@ -30,7 +30,7 @@ function App() {
               </>} />
           <Route
             path="/create-project"
-            element={<CreateProject projectContract={projectContract} nftContract={nftContract} />} />
+            element={<CreateProject projectContract={projectContract} nftContract={nftContract} easSDK={easSDK} />} />
           <Route
             path="/"
             element={<Home projectContract={projectContract} easSDK={easSDK} />} />

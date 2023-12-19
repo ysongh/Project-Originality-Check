@@ -4,10 +4,11 @@ import { FormControl, FormLabel, Box, ButtonGroup, Input, Heading, Button } from
 import { NFTStorage, File } from 'nft.storage';
 
 import { NFTSTORAGE_APIKEY } from "../keys";
+import { createOnchainAttestations } from '../utils/EAS';
 
 const client = new NFTStorage({ token: NFTSTORAGE_APIKEY });
 
-function CreateProject({ projectContract, nftContract }) {
+function CreateProject({ projectContract, nftContract, easSDK }) {
   const router = useNavigate();
 
   const [title, setTitle] = useState('');
@@ -28,28 +29,31 @@ function CreateProject({ projectContract, nftContract }) {
   const handleSubmit = async () => {
     try{
       setLoading(true);
-      setLoadingText("Uploading Data to IPFS...")
-      const imageFile = new File([ image ], image.name, { type: image.type });
-      const metadata = await client.store({
-          name: title,
-          description: description,
-          image: imageFile
-      });
+      // setLoadingText("Uploading Data to IPFS...")
+      // const imageFile = new File([ image ], image.name, { type: image.type });
+      // const metadata = await client.store({
+      //     name: title,
+      //     description: description,
+      //     image: imageFile
+      // });
 
-      console.log(metadata);
-      const arr = metadata.data.image.pathname.split("/");
-      const imageURL = `https://${arr[2]}.ipfs.dweb.link/${arr[3]}`;
-      setcidurl(metadata.url);
+      // console.log(metadata);
+      // const arr = metadata.data.image.pathname.split("/");
+      // const imageURL = `https://${arr[2]}.ipfs.dweb.link/${arr[3]}`;
+      // setcidurl(metadata.url);
+
+      const imageURL = "ipfs://bafyreifuhu6veofqib3kjgsunu7ex2vzx5ecf4ei36cjoru5kkol23soea/metadata.json";
 
       setLoadingText("Creating Project...")
       console.log(title, description, url);
-      const transaction = await projectContract.insertProject(title, description, url, imageURL, tag);
-      const tx = await transaction.wait();
-      console.log(tx);
-      setLoadingText("Minting NFT...")
-      const transaction1 = await nftContract.mintProject(cidurl);
-      const tx1 = await transaction1.wait();
-      console.log(tx1);
+      await createOnchainAttestations(easSDK, title, description, url, imageURL, [tag]);
+      // const transaction = await projectContract.insertProject(title, description, url, imageURL, tag);
+      // const tx = await transaction.wait();
+      // console.log(tx);
+      // setLoadingText("Minting NFT...")
+      // const transaction1 = await nftContract.mintProject(cidurl);
+      // const tx1 = await transaction1.wait();
+      // console.log(tx1);
       setLoading(false);
     } catch(error) {
       console.error(error);

@@ -8,14 +8,18 @@ export const getAttestation = async (eas) => {
   console.log(attestation);
 }
 
-export const createOnchainAttestations = async (eas) => {
-  const schemaEncoder = new SchemaEncoder("uint256 eventId, uint8 voteIndex");
+export const createOnchainAttestations = async (eas, title, description, url, image_url, tags) => {
+  const schemaEncoder = new SchemaEncoder("string title,string description,string url,string image_url,string[] tags,uint248 date_created");
   const encodedData = schemaEncoder.encodeData([
-    { name: "eventId", value: 1, type: "uint256" },
-    { name: "voteIndex", value: 1, type: "uint8" },
+    { name: "title", value: title, type: "string" },
+    { name: "description", value: description, type: "string" },
+    { name: "url", value: url, type: "string" },
+    { name: "image_url", value: image_url, type: "string" },
+    { name: "tags", value: tags, type: "string[]" },
+    { name: "date_created", value: 1, type: "uint248" },
   ]);
   
-  const schemaUID = "0xb16fa048b0d597f5a821747eba64efa4762ee5143e9a80600d0005386edfc995";
+  const schemaUID = "0xfb9cdfa13de099dd6e4cfa235e0a5cb52a63a171b879f4ca7f75b83dbc0c3f0b";
   
   const tx = await eas.attest({
     schema: schemaUID,
