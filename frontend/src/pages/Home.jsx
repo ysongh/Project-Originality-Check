@@ -3,8 +3,9 @@ import { Container, Heading, InputGroup, Input, InputRightElement, Text, Image, 
 import { SearchIcon } from "@chakra-ui/icons";
 
 import { getProjectsFromTableland, getProjectsByTagFromTableland, getProjectsByTitleFromTableland } from "../utils/Tableland";
+import { getAttestation } from "../utils/EAS";
 
-function Home({ projectContract }) {
+function Home({ projectContract, easSDK }) {
   const [search, setSearch] = useState("");
   const [searchTitle, setSearchTitle] = useState("");
   const [projects, setProjects] = useState([]);
@@ -25,6 +26,10 @@ function Home({ projectContract }) {
     }
 
     getProjects();
+  }, [])
+
+  useEffect(() => {
+    getAttestation(easSDK);
   }, [])
 
   const getProjectsByTag = async () => {

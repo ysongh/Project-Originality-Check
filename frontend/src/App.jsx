@@ -10,6 +10,7 @@ function App() {
   const [ethAddress, setETHAddress] = useState('');
   const [projectContract, setProjectContract] = useState(null);
   const [nftContract, setnftContract] = useState(null);
+  const [easSDK, seteasSDK] = useState(null);
 
   return (
     <ChakraProvider>
@@ -18,7 +19,8 @@ function App() {
           ethAddress={ethAddress}
           setETHAddress={setETHAddress}
           setProjectContract={setProjectContract}
-          setnftContract={setnftContract} />
+          setnftContract={setnftContract}
+          seteasSDK={seteasSDK} />
         <Routes>
           <Route
             path="/test"
@@ -31,7 +33,7 @@ function App() {
             element={<CreateProject projectContract={projectContract} nftContract={nftContract} />} />
           <Route
             path="/"
-            element={<Home projectContract={projectContract} />} />
+            element={<Home projectContract={projectContract} easSDK={easSDK} />} />
         </Routes>
       </HashRouter>
     </ChakraProvider>
