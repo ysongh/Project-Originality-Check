@@ -11,6 +11,7 @@ function App() {
   const [projectContract, setProjectContract] = useState(null);
   const [nftContract, setnftContract] = useState(null);
   const [easSDK, seteasSDK] = useState(null);
+  const [userSigner, setuserSigner] = useState(null);
 
   return (
     <ChakraProvider>
@@ -20,7 +21,8 @@ function App() {
           setETHAddress={setETHAddress}
           setProjectContract={setProjectContract}
           setnftContract={setnftContract}
-          seteasSDK={seteasSDK} />
+          seteasSDK={seteasSDK}
+          setuserSigner={setuserSigner} />
         <Routes>
           <Route
             path="/test"
@@ -30,7 +32,15 @@ function App() {
               </>} />
           <Route
             path="/create-project"
-            element={<CreateProject projectContract={projectContract} nftContract={nftContract} easSDK={easSDK} />} />
+            element={
+              <CreateProject
+                projectContract={projectContract}
+                nftContract={nftContract} 
+                easSDK={easSDK}
+                userSigner={userSigner}
+              />
+            }
+          />
           <Route
             path="/"
             element={<Home projectContract={projectContract} easSDK={easSDK} />} />

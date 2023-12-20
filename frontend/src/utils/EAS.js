@@ -9,22 +9,23 @@ export const getAttestation = async (eas) => {
 }
 
 export const createOnchainAttestations = async (eas, title, description, url, image_url, tags) => {
-  const schemaEncoder = new SchemaEncoder("string title,string description,string url,string image_url,string[] tags,uint248 date_created");
+  // const schemaEncoder = new SchemaEncoder("string title,string description,string url,string image_url,string[] tags,uint248 date_created");
+  const schemaEncoder = new SchemaEncoder("string title,string description,string url");
   const encodedData = schemaEncoder.encodeData([
     { name: "title", value: title, type: "string" },
     { name: "description", value: description, type: "string" },
     { name: "url", value: url, type: "string" },
-    { name: "image_url", value: image_url, type: "string" },
-    { name: "tags", value: tags, type: "string[]" },
-    { name: "date_created", value: 1, type: "uint248" },
+    // { name: "image_url", value: image_url, type: "string" },
+    // { name: "tags", value: tags, type: "string[]" },
+    // { name: "date_created", value: 1, type: "uint248" },
   ]);
   
-  const schemaUID = "0xfb9cdfa13de099dd6e4cfa235e0a5cb52a63a171b879f4ca7f75b83dbc0c3f0b";
+  const schemaUID = "0xb6c839bc6790233b4492a0b0c4a9c152019012885e4a5352899e5bf7bbb6869f";
   
   const tx = await eas.attest({
     schema: schemaUID,
     data: {
-      recipient: "0xaa90e02e88047232288D01Fe04d846e8A4Cc88dd",
+      recipient: "0x0000000000000000000000000000000000000000",
       expirationTime: 0,
       revocable: true, // Be aware that if your schema is not revocable, this MUST be false
       data: encodedData,
@@ -36,14 +37,15 @@ export const createOnchainAttestations = async (eas, title, description, url, im
   console.log("New attestation UID:", newAttestationUID);
 }
 
-export const createOffchainAttestations = async (eas, signer) => {
+export const createOffchainAttestations = async (eas, signer, title, description, url) => {
   const offchain = await eas.getOffchain();
 
   // Initialize SchemaEncoder with the schema string
-  const schemaEncoder = new SchemaEncoder("uint256 eventId, uint8 voteIndex");
+  const schemaEncoder = new SchemaEncoder("string title,string description,string url");
   const encodedData = schemaEncoder.encodeData([
-    { name: "eventId", value: 1, type: "uint256" },
-    { name: "voteIndex", value: 1, type: "uint8" },
+    { name: "title", value: title, type: "string" },
+    { name: "description", value: description, type: "string" },
+    { name: "url", value: url, type: "string" },
   ]);
   
   const offchainAttestation = await offchain.signOffchainAttestation({
@@ -55,7 +57,7 @@ export const createOffchainAttestations = async (eas, signer) => {
     revocable: true, // Be aware that if your schema is not revocable, this MUST be false
     version: 1,
     nonce: 0,
-    schema: "0xb16fa048b0d597f5a821747eba64efa4762ee5143e9a80600d0005386edfc995",
+    schema: "0xb6c839bc6790233b4492a0b0c4a9c152019012885e4a5352899e5bf7bbb6869f",
     refUID: '0x0000000000000000000000000000000000000000000000000000000000000000',
     data: encodedData,
   }, signer);

@@ -12,7 +12,7 @@ const LOCAL_PROJECT_NFT_CONTRACT_ADDRESS = "0x5FC8d32690cc91D4c39d9d3abcBD16989F
 
 export const EASContractAddress = "0xC2679fBD37d54388Ce493F1DB75320D236e1815e"; // Sepolia v0.26
 
-function Navbar({ ethAddress, setETHAddress, setProjectContract, setnftContract, seteasSDK }) {
+function Navbar({ ethAddress, setETHAddress, setProjectContract, setnftContract, seteasSDK, setuserSigner }) {
   const [networkName, setnetworkName] = useState("");
 
   const connectMetamask = async () => {
@@ -21,6 +21,7 @@ function Navbar({ ethAddress, setETHAddress, setProjectContract, setnftContract,
     const etherprovider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = etherprovider.getSigner();
     console.log(signer);
+    setuserSigner(signer);
 
     // Initialize the sdk with the address of the EAS Schema contract address
     const eas = new EAS(EASContractAddress);

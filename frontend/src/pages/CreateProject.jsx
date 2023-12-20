@@ -4,11 +4,11 @@ import { FormControl, FormLabel, Box, ButtonGroup, Input, Heading, Button } from
 import { NFTStorage, File } from 'nft.storage';
 
 import { NFTSTORAGE_APIKEY } from "../keys";
-import { createOnchainAttestations } from '../utils/EAS';
+import { createOnchainAttestations, createOffchainAttestations } from '../utils/EAS';
 
 const client = new NFTStorage({ token: NFTSTORAGE_APIKEY });
 
-function CreateProject({ projectContract, nftContract, easSDK }) {
+function CreateProject({ projectContract, nftContract, easSDK, userSigner }) {
   const router = useNavigate();
 
   const [title, setTitle] = useState('');
@@ -47,6 +47,7 @@ function CreateProject({ projectContract, nftContract, easSDK }) {
       setLoadingText("Creating Project...")
       console.log(title, description, url);
       await createOnchainAttestations(easSDK, title, description, url, imageURL, [tag]);
+      // await createOffchainAttestations(easSDK, userSigner, title, description, url);
       // const transaction = await projectContract.insertProject(title, description, url, imageURL, tag);
       // const tx = await transaction.wait();
       // console.log(tx);
