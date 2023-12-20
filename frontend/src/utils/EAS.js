@@ -1,5 +1,7 @@
 import { SchemaEncoder } from "@ethereum-attestation-service/eas-sdk";
 
+const SCHEMA_UID = "0x3e9b764ca683b064604465f0afd678c9e3c5ef8468852cec44068948e64df846";
+
 export const getAttestation = async (eas) => {
   const uid = "0xff08bbf3d3e6e0992fc70ab9b9370416be59e87897c3d42b20549901d2cccc3e";
 
@@ -20,7 +22,7 @@ export const createOnchainAttestations = async (eas, title, description, url, im
     // { name: "date_created", value: 1, type: "uint248" },
   ]);
   
-  const schemaUID = "0xb6c839bc6790233b4492a0b0c4a9c152019012885e4a5352899e5bf7bbb6869f";
+  const schemaUID = SCHEMA_UID;
   
   const tx = await eas.attest({
     schema: schemaUID,
@@ -57,7 +59,7 @@ export const createOffchainAttestations = async (eas, signer, title, description
     revocable: true, // Be aware that if your schema is not revocable, this MUST be false
     version: 1,
     nonce: 0,
-    schema: "0xb6c839bc6790233b4492a0b0c4a9c152019012885e4a5352899e5bf7bbb6869f",
+    schema: SCHEMA_UID,
     refUID: '0x0000000000000000000000000000000000000000000000000000000000000000',
     data: encodedData,
   }, signer);
