@@ -1,4 +1,4 @@
-import { SchemaEncoder } from "@ethereum-attestation-service/eas-sdk";
+import { SchemaEncoder, SchemaRegistry } from "@ethereum-attestation-service/eas-sdk";
 
 const SCHEMA_UID = "0x3e9b764ca683b064604465f0afd678c9e3c5ef8468852cec44068948e64df846";
 
@@ -64,4 +64,16 @@ export const createOffchainAttestations = async (eas, signer, title, description
     data: encodedData,
   }, signer);
   console.log(offchainAttestation);
+}
+
+export const getSchemaInformation = async (provider) => {
+  const schemaRegistryContractAddress = "0x0a7E2Ff54e76B8E6659aedc9103FB21c038050D0"; // Sepolia 0.26
+  const schemaRegistry = new SchemaRegistry(schemaRegistryContractAddress);
+  schemaRegistry.connect(provider);
+
+  const schemaUID = SCHEMA_UID;
+
+  const schemaRecord = await schemaRegistry.getSchema({ uid: schemaUID });
+
+  console.log(schemaRecord);
 }
