@@ -7,7 +7,7 @@ import { ethers } from 'ethers';
 import ProjectOriginalityCheck from "../../artifacts/contracts/ProjectOriginalityCheck.sol/ProjectOriginalityCheck.json";
 import ProjectNFT from "../../artifacts/contracts/ProjectNFT.sol/ProjectNFT.json";
 import { getSchemaInformation } from '../../utils/EAS';
-import { getLatest25Attestations } from '../../utils/Graphql';
+import { getAttestationsBySchemaId } from '../../utils/Graphql';
 
 const LOCAL_PROJECT_CONTRACT_ADDRESS = "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9";
 const LOCAL_PROJECT_NFT_CONTRACT_ADDRESS = "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707";
@@ -43,7 +43,7 @@ function Navbar({ ethAddress, setETHAddress, setProjectContract, setnftContract,
     console.log(name, chainId);
     setnetworkName(name);
     getSchemaInformation(provider);
-    getLatest25Attestations();
+    getAttestationsBySchemaId();
 
     // const contract1 = new ethers.Contract(LOCAL_PROJECT_CONTRACT_ADDRESS, ProjectOriginalityCheck.abi, signer);
     // setProjectContract(contract1);

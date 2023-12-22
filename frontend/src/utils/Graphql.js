@@ -1,3 +1,5 @@
+const SCHEMA_UID = "0x3e9b764ca683b064604465f0afd678c9e3c5ef8468852cec44068948e64df846";
+
 export const getLatest25Attestations = () => {
   // Define your GraphQL query
   const query = `
@@ -10,7 +12,8 @@ export const getLatest25Attestations = () => {
         revocable
         revocationTime
         expirationTime
-        data
+        data,
+        schemaId,
       }
     }
   `;
@@ -31,6 +34,40 @@ export const getLatest25Attestations = () => {
   })
   .catch(error => {
     // Handle errors here
+    console.error('Error:', error);
+  });
+
+}
+
+export const getAttestationsBySchemaId = () => {
+  const query = `
+    query Attestations {
+      attestations(where: { schemaId: { equals: "${SCHEMA_UID}" } }) {
+        id
+        attester
+        recipient
+        refUID
+        revocable
+        revocationTime
+        expirationTime
+        data,
+        schemaId,
+      }
+    }
+  `;
+
+  fetch('https://sepolia.easscan.org/graphql', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({ query }),
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log(data);
+  })
+  .catch(error => {
     console.error('Error:', error);
   });
 
