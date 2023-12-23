@@ -39,7 +39,7 @@ export const getLatest25Attestations = () => {
 
 }
 
-export const getAttestationsBySchemaId = () => {
+export const getAttestationsBySchemaId = async () => {
   const query = `
     query Attestations {
       attestations(where: { schemaId: { equals: "${SCHEMA_UID}" } }) {
@@ -52,23 +52,24 @@ export const getAttestationsBySchemaId = () => {
         expirationTime
         data,
         schemaId,
+        decodedDataJson,
       }
     }
   `;
 
-  fetch('https://sepolia.easscan.org/graphql', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({ query }),
-  })
-  .then(response => response.json())
-  .then(data => {
-    console.log(data);
-  })
-  .catch(error => {
-    console.error('Error:', error);
-  });
+  try {
+    const response = await fetch('https://sepolia.easscan.org/graphql', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ query }),
+    });
 
+    const data = await response.json();
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.error('Error:', error);
+  }
 }
