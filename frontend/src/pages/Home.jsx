@@ -4,6 +4,7 @@ import { SearchIcon } from "@chakra-ui/icons";
 
 import { getProjectsFromTableland, getProjectsByTagFromTableland, getProjectsByTitleFromTableland } from "../utils/Tableland";
 import { getAttestation } from "../utils/EAS";
+import { getAttestationsBySchemaId } from "../utils/Graphql";
 
 function Home({ projectContract, easSDK }) {
   const [search, setSearch] = useState("");
@@ -19,17 +20,21 @@ function Home({ projectContract, easSDK }) {
   //   if (projectContract) getProjects();
   // }, [projectContract])
 
+  // useEffect(() => {
+  //   const getProjects = async () => {
+  //     const newProjects = await getProjectsFromTableland();
+  //     setProjects(newProjects);
+  //   }
+
+  //   getProjects();
+  // }, [])
+
   useEffect(() => {
-    const getProjects = async () => {
-      const newProjects = await getProjectsFromTableland();
-      setProjects(newProjects);
+    const getAttestations = async () => {
+      const data = await getAttestationsBySchemaId();
+      setProjects(data?.data?.attestations);
     }
-
-    getProjects();
-  }, [])
-
-  useEffect(() => {
-    getAttestation(easSDK);
+    getAttestations();
   }, [])
 
   const getProjectsByTag = async () => {
@@ -65,7 +70,7 @@ function Home({ projectContract, easSDK }) {
           <Box key={p.id} borderWidth='1px' borderRadius='lg' borderColor='green' overflow='hidden' p='5' mt='5'>
             <Image src={p.image_url} />
             <Heading textAlign="center" fontSize="3xl" mb="4">{p.title}</Heading>
-            <Text textAlign="center" fontSize="xl">{p.description}</Text>
+            <Text textAlign="center" fontSize="xl">{p.decodedDataJson}2</Text>
             {/* <Text textAlign="center" fontSize="xl">{p.date_created}</Text> */}
             {/* <Text textAlign="center" fontSize="xl">{p.url}</Text> */}
             <Text textAlign="center" fontSize="xl">{p.tag}</Text>
