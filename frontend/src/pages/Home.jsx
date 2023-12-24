@@ -32,6 +32,7 @@ function Home({ projectContract, easSDK }) {
   useEffect(() => {
     const getAttestations = async () => {
       const data = await getAttestationsBySchemaId();
+      console.log(JSON.parse(data?.data?.attestations[0].decodedDataJson));
       setProjects(data?.data?.attestations);
     }
     getAttestations();
@@ -66,23 +67,27 @@ function Home({ projectContract, easSDK }) {
       </InputGroup>
       <Heading mt="2">Projects</Heading>
       <SimpleGrid minChildWidth='300px' spacing='40px'>
-        {projects.map(p => (
-          <Box key={p.id} borderWidth='1px' borderRadius='lg' borderColor='green' overflow='hidden' p='5' mt='5'>
-            <Image src={p.image_url} />
-            <Heading textAlign="center" fontSize="3xl" mb="4">{p.title}</Heading>
-            <Text textAlign="center" fontSize="xl">{p.decodedDataJson}2</Text>
-            {/* <Text textAlign="center" fontSize="xl">{p.date_created}</Text> */}
-            {/* <Text textAlign="center" fontSize="xl">{p.url}</Text> */}
-            <Text textAlign="center" fontSize="xl">{p.tag}</Text>
-            <br />
-            <Button mt="4" width="100%" bg="green.300" onClick={() => navigate(`/`)}>
-              Github
-            </Button>
-            <Button mt="4" width="100%" onClick={() => navigate(`/`)}>
-              View
-            </Button>
-          </Box>
-        ))}
+        {projects.map(p => {
+          const project = JSON.parse(p?.decodedDataJson);
+
+          return (
+            <Box key={p.id} borderWidth='1px' borderRadius='lg' borderColor='green' overflow='hidden' p='5' mt='5'>
+              <Image src={p.image_url} />
+              <Heading textAlign="center" fontSize="3xl" mb="4">{project[0]?.value?.value}</Heading>
+              <Text textAlign="center" fontSize="xl">{project[1]?.value?.value}</Text>
+              {/* <Text textAlign="center" fontSize="xl">{p.date_created}</Text> */}
+              <Text textAlign="center" fontSize="xl">{project[2]?.value?.value}</Text>
+              <Text textAlign="center" fontSize="xl">{p.tag}</Text>
+              <br />
+              <Button mt="4" width="100%" bg="green.300" onClick={() => navigate(`/`)}>
+                Github
+              </Button>
+              <Button mt="4" width="100%" onClick={() => navigate(`/`)}>
+                View
+              </Button>
+            </Box>
+          );
+        })}
       </SimpleGrid>
     </Container>
   )
