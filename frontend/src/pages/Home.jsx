@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Container, Heading, InputGroup, Input, InputRightElement, Text, Image, SimpleGrid, Box, Button  } from '@chakra-ui/react';
 import { SearchIcon } from "@chakra-ui/icons";
 
-import { getProjectsFromTableland, getProjectsByTagFromTableland, getProjectsByTitleFromTableland } from "../utils/Tableland";
 import { getAttestation } from "../utils/EAS";
 import { getAttestationsBySchemaId } from "../utils/Graphql";
 
@@ -20,15 +19,6 @@ function Home({ projectContract, easSDK }) {
   //   if (projectContract) getProjects();
   // }, [projectContract])
 
-  // useEffect(() => {
-  //   const getProjects = async () => {
-  //     const newProjects = await getProjectsFromTableland();
-  //     setProjects(newProjects);
-  //   }
-
-  //   getProjects();
-  // }, [])
-
   useEffect(() => {
     const getAttestations = async () => {
       const data = await getAttestationsBySchemaId();
@@ -39,13 +29,11 @@ function Home({ projectContract, easSDK }) {
   }, [])
 
   const getProjectsByTag = async () => {
-    const newProjects = await getProjectsByTagFromTableland(search);
-    setProjects(newProjects);
+    
   }
 
   const getProjectsByTitle = async () => {
-    const newProjects = await getProjectsByTitleFromTableland(searchTitle);
-    setProjects(newProjects);
+   
   }
 
   return (
