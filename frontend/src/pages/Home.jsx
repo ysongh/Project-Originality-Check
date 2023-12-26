@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Container, Heading, InputGroup, Input, InputRightElement, Text, Image, SimpleGrid, Box, Button  } from '@chakra-ui/react';
+import { Container, Heading, InputGroup, Input, InputRightElement, Text, Image, SimpleGrid, Box, Button, Tag } from '@chakra-ui/react';
 import { SearchIcon } from "@chakra-ui/icons";
 
 import { getAttestation } from "../utils/EAS";
@@ -65,7 +65,9 @@ function Home({ projectContract, easSDK }) {
               <Text textAlign="center" fontSize="xl">{project[1]?.value?.value}</Text>
               {/* <Text textAlign="center" fontSize="xl">{p.date_created}</Text> */}
               <Text textAlign="center" fontSize="xl">{project[2]?.value?.value}</Text>
-              <Text textAlign="center" fontSize="xl">{project[4]?.value?.value[0]}</Text>
+              <Tag size="lg">
+                {project[4]?.value?.value[0]}
+              </Tag>
               <br />
               <Button mt="4" width="100%" bg="green.300" onClick={() => navigate(`/`)}>
                 Github
