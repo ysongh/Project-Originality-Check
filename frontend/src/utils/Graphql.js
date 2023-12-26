@@ -1,4 +1,4 @@
-const SCHEMA_UID = "0x3e9b764ca683b064604465f0afd678c9e3c5ef8468852cec44068948e64df846";
+const SCHEMA_UID = "0x064eb97ccf6aaf0f29030900e1244d8f04d218107c769627be6c6088a1b17916";
 
 export const getLatest25Attestations = () => {
   // Define your GraphQL query

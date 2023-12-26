@@ -1,6 +1,6 @@
 import { SchemaEncoder, SchemaRegistry } from "@ethereum-attestation-service/eas-sdk";
 
-const SCHEMA_UID = "0x3e9b764ca683b064604465f0afd678c9e3c5ef8468852cec44068948e64df846";
+const SCHEMA_UID = "0x064eb97ccf6aaf0f29030900e1244d8f04d218107c769627be6c6088a1b17916";
 
 export const getAttestation = async (eas) => {
   const uid = "0xff08bbf3d3e6e0992fc70ab9b9370416be59e87897c3d42b20549901d2cccc3e";
@@ -11,15 +11,14 @@ export const getAttestation = async (eas) => {
 }
 
 export const createOnchainAttestations = async (eas, title, description, url, image_url, tags) => {
-  // const schemaEncoder = new SchemaEncoder("string title,string description,string url,string image_url,string[] tags,uint248 date_created");
-  const schemaEncoder = new SchemaEncoder("string title,string description,string url");
+  const schemaEncoder = new SchemaEncoder("string title,string description,string url,string image_url,string[] tags,uint248 date_created");
   const encodedData = schemaEncoder.encodeData([
     { name: "title", value: title, type: "string" },
     { name: "description", value: description, type: "string" },
     { name: "url", value: url, type: "string" },
-    // { name: "image_url", value: image_url, type: "string" },
-    // { name: "tags", value: tags, type: "string[]" },
-    // { name: "date_created", value: 1, type: "uint248" },
+    { name: "image_url", value: image_url, type: "string" },
+    { name: "tags", value: tags, type: "string[]" },
+    { name: "date_created", value: 1, type: "uint248" },
   ]);
   
   const schemaUID = SCHEMA_UID;
