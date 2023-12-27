@@ -29,20 +29,18 @@ function CreateProject({ projectContract, nftContract, easSDK, userSigner }) {
   const handleSubmit = async () => {
     try{
       setLoading(true);
-      // setLoadingText("Uploading Data to IPFS...")
-      // const imageFile = new File([ image ], image.name, { type: image.type });
-      // const metadata = await client.store({
-      //     name: title,
-      //     description: description,
-      //     image: imageFile
-      // });
+      setLoadingText("Uploading Data to IPFS...")
+      const imageFile = new File([ image ], image.name, { type: image.type });
+      const metadata = await client.store({
+          name: title,
+          description: description,
+          image: imageFile
+      });
 
-      // console.log(metadata);
-      // const arr = metadata.data.image.pathname.split("/");
-      // const imageURL = `https://${arr[2]}.ipfs.dweb.link/${arr[3]}`;
-      // setcidurl(metadata.url);
-
-      const imageURL = "ipfs://bafyreifuhu6veofqib3kjgsunu7ex2vzx5ecf4ei36cjoru5kkol23soea/metadata.json";
+      console.log(metadata);
+      const arr = metadata.data.image.pathname.split("/");
+      const imageURL = `https://${arr[2]}.ipfs.dweb.link/${arr[3]}`;
+      setcidurl(metadata.url);
 
       setLoadingText("Creating Project...")
       console.log(title, description, url);
