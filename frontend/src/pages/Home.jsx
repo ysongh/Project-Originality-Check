@@ -60,7 +60,7 @@ function Home({ projectContract, easSDK }) {
 
           return (
             <Box key={p.id} borderWidth='1px' borderRadius='lg' borderColor='green' overflow='hidden' p='5' mt='5'>
-              <Image src={project[3]?.value?.value} />
+              <Image src={project[3]?.value?.value} fallbackSrc='https://via.placeholder.com/150' />
               <Heading textAlign="center" fontSize="3xl" mb="4">{project[0]?.value?.value}</Heading>
               <Text textAlign="center" fontSize="xl">{project[1]?.value?.value}</Text>
               {/* <Text textAlign="center" fontSize="xl">{p.date_created}</Text> */}
