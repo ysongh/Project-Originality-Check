@@ -59,22 +59,29 @@ function Home({ projectContract, easSDK }) {
           const project = JSON.parse(p?.decodedDataJson);
 
           return (
-            <Box key={p.id} borderWidth='1px' borderRadius='lg' borderColor='green' overflow='hidden' p='5' mt='5'>
-              <Image src={project[3]?.value?.value} fallbackSrc='https://via.placeholder.com/150' />
-              <Heading textAlign="center" fontSize="3xl" mb="4">{project[0]?.value?.value}</Heading>
-              <Text textAlign="center" fontSize="xl">{project[1]?.value?.value}</Text>
-              {/* <Text textAlign="center" fontSize="xl">{p.date_created}</Text> */}
-              <Text textAlign="center" fontSize="xl">{project[2]?.value?.value}</Text>
-              <Tag size="lg">
-                {project[4]?.value?.value[0]}
-              </Tag>
-              <br />
-              <Button mt="4" width="100%" bg="green.300" onClick={() => navigate(`/`)}>
-                Github
-              </Button>
-              <Button mt="4" width="100%" onClick={() => navigate(`/`)}>
-                View
-              </Button>
+            <Box key={p.id} borderWidth='1px' borderRadius='lg' borderColor='green' overflow='hidden' mt='5'>
+              <Image
+                src={project[3]?.value?.value}
+                fallbackSrc='https://via.placeholder.com/150'
+                height={250}
+                bg="gray.100"
+              />
+              <Box p="5">
+                <Heading textAlign="center" fontSize="3xl" mb="4">{project[0]?.value?.value}</Heading>
+                <Text textAlign="center" fontSize="xl">{project[1]?.value?.value}</Text>
+                {/* <Text textAlign="center" fontSize="xl">{p.date_created}</Text> */}
+                <Text textAlign="center" fontSize="xl">{project[2]?.value?.value}</Text>
+                <Tag size="lg">
+                  {project[4]?.value?.value[0]}
+                </Tag>
+                <br />
+                <Button mt="4" width="100%" bg="green.300" onClick={() => navigate(`/`)}>
+                  Github
+                </Button>
+                <Button mt="4" width="100%" onClick={() => navigate(`/`)}>
+                  View
+                </Button>
+              </Box>
             </Box>
           );
         })}
