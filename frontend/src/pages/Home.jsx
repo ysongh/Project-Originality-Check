@@ -71,9 +71,11 @@ function Home({ projectContract, easSDK }) {
                 <Text textAlign="center" fontSize="xl">{project[1]?.value?.value}</Text>
                 {/* <Text textAlign="center" fontSize="xl">{p.date_created}</Text> */}
                 <Text textAlign="center" fontSize="xl">{project[2]?.value?.value}</Text>
-                <Tag size="lg">
-                  {project[4]?.value?.value[0]}
-                </Tag>
+                {project[4]?.value?.value.map((t, index) => (
+                  <Tag size="lg" key={index} mr="1">
+                    {t}
+                  </Tag>
+                ))}
                 <br />
                 <Button mt="4" width="100%" bg="green.300" onClick={() => navigate(`/`)}>
                   Github

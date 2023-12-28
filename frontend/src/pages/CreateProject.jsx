@@ -44,7 +44,8 @@ function CreateProject({ projectContract, nftContract, easSDK, userSigner }) {
 
       setLoadingText("Creating Project...")
       console.log(title, description, url);
-      await createOnchainAttestations(easSDK, title, description, url, imageURL, [tag]);
+      const tags = tag.split(",");
+      await createOnchainAttestations(easSDK, title, description, url, imageURL, tags);
       // await createOffchainAttestations(easSDK, userSigner, title, description, url);
       // const transaction = await projectContract.insertProject(title, description, url, imageURL, tag);
       // const tx = await transaction.wait();
@@ -82,7 +83,7 @@ function CreateProject({ projectContract, nftContract, easSDK, userSigner }) {
             <input type='file' id='photo' onChange={handleUpload}/>
           </FormControl>
           <FormControl mb='3'>
-            <FormLabel htmlFor='tag'>Tag</FormLabel>
+            <FormLabel htmlFor='tag'>Tags (Separate by commas)</FormLabel>
             <Input id='tag' onChange={(e) => setTag(e.target.value)}/>
           </FormControl>
           <ButtonGroup spacing='6'>
