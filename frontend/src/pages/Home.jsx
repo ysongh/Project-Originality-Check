@@ -77,9 +77,11 @@ function Home({ projectContract, easSDK }) {
                   </Tag>
                 ))}
                 <br />
-                <Button mt="4" width="100%" bg="green.300" onClick={() => navigate(`/`)}>
-                  Github
-                </Button>
+                <a href={project[2]?.value?.value} target="_blank" rel="noopener noreferrer">
+                  <Button mt="4" width="100%" bg="green.300" onClick={() => navigate(`/`)}>
+                    Github
+                  </Button>
+                </a>
                 <Button mt="4" width="100%" onClick={() => navigate(`/`)}>
                   View
                 </Button>
