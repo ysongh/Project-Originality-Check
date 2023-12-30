@@ -63,14 +63,13 @@ function Home({ projectContract, easSDK }) {
               <Image
                 src={project[3]?.value?.value}
                 fallbackSrc='https://via.placeholder.com/150'
-                height={250}
+                height={220}
                 bg="gray.100"
               />
               <Box p="5">
                 <Heading textAlign="center" fontSize="3xl" mb="4">{project[0]?.value?.value}</Heading>
                 <Text textAlign="center" fontSize="xl">{project[1]?.value?.value}</Text>
                 {/* <Text textAlign="center" fontSize="xl">{p.date_created}</Text> */}
-                <Text textAlign="center" fontSize="xl">{project[2]?.value?.value}</Text>
                 {project[4]?.value?.value.map((t, index) => (
                   <Tag size="lg" key={index} mr="1">
                     {t}
