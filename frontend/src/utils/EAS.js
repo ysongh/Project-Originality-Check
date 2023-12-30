@@ -38,15 +38,18 @@ export const createOnchainAttestations = async (eas, title, description, url, im
   console.log("New attestation UID:", newAttestationUID);
 }
 
-export const createOffchainAttestations = async (eas, signer, title, description, url) => {
+export const createOffchainAttestations = async (eas, signer, title, description, url, image_url, tags) => {
   const offchain = await eas.getOffchain();
 
   // Initialize SchemaEncoder with the schema string
-  const schemaEncoder = new SchemaEncoder("string title,string description,string url");
+  const schemaEncoder = new SchemaEncoder("string title,string description,string url,string image_url,string[] tags,uint248 date_created");
   const encodedData = schemaEncoder.encodeData([
     { name: "title", value: title, type: "string" },
     { name: "description", value: description, type: "string" },
     { name: "url", value: url, type: "string" },
+    { name: "image_url", value: image_url, type: "string" },
+    { name: "tags", value: tags, type: "string[]" },
+    { name: "date_created", value: 1, type: "uint248" },
   ]);
   
   const offchainAttestation = await offchain.signOffchainAttestation({
