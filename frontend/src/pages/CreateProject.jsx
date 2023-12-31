@@ -87,7 +87,7 @@ function CreateProject({ projectContract, nftContract, easSDK, userSigner }) {
             <Input id='tag' onChange={(e) => setTag(e.target.value)}/>
           </FormControl>
           <ButtonGroup spacing='6'>
-            <Button colorScheme='orange' onClick={handleSubmit} isLoading={loading} loadingText={loadingText}>
+            <Button bg="green.300" onClick={handleSubmit} isLoading={loading} loadingText={loadingText}>
               Create
             </Button>
             <Button onClick={() => router.push('/')}>Cancel</Button>

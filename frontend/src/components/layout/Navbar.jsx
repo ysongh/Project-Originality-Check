@@ -65,7 +65,7 @@ function Navbar({ ethAddress, setETHAddress, setProjectContract, setnftContract,
           <Link as={ReactLink} to="/create-project">Add Project</Link>
           <Spacer />
           {networkName && <p><Badge bgColor="#ff99fe" fontSize='.9rem'>{networkName}</Badge></p>}
-          <Button onClick={connectMetamask}>
+          <Button bg="green.300" onClick={connectMetamask}>
             {ethAddress ? ethAddress.slice(0, 5) + "..." + ethAddress.slice(37, 42) : 'Connect Wallet'}
           </Button>
         </Flex>
