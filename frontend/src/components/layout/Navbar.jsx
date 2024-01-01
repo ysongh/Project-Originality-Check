@@ -1,16 +1,11 @@
 import { useState } from 'react';
 import { Link as ReactLink } from 'react-router-dom';
 import { Container, Box, Flex, Heading, Spacer, Badge, Button, Link } from '@chakra-ui/react';
-import { EAS, Offchain, SchemaEncoder, SchemaRegistry } from "@ethereum-attestation-service/eas-sdk";
+import { EAS } from "@ethereum-attestation-service/eas-sdk";
 import { ethers } from 'ethers';
 
-import ProjectOriginalityCheck from "../../artifacts/contracts/ProjectOriginalityCheck.sol/ProjectOriginalityCheck.json";
-import ProjectNFT from "../../artifacts/contracts/ProjectNFT.sol/ProjectNFT.json";
 import { getSchemaInformation } from '../../utils/EAS';
 import { getAttestationsBySchemaId } from '../../utils/Graphql';
-
-const LOCAL_PROJECT_CONTRACT_ADDRESS = "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9";
-const LOCAL_PROJECT_NFT_CONTRACT_ADDRESS = "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707";
 
 export const EASContractAddress = "0xC2679fBD37d54388Ce493F1DB75320D236e1815e"; // Sepolia v0.26
 
@@ -44,12 +39,6 @@ function Navbar({ ethAddress, setETHAddress, setProjectContract, setnftContract,
     setnetworkName(name);
     getSchemaInformation(provider);
     getAttestationsBySchemaId();
-
-    // const contract1 = new ethers.Contract(LOCAL_PROJECT_CONTRACT_ADDRESS, ProjectOriginalityCheck.abi, signer);
-    // setProjectContract(contract1);
-
-    // const contract2 = new ethers.Contract(LOCAL_PROJECT_NFT_CONTRACT_ADDRESS, ProjectNFT.abi, signer);
-    // setnftContract(contract2)
   }
 
   return (
