@@ -41,7 +41,7 @@ function Home({ projectContract, easSDK }) {
       <Text fontWeight="bold" mt="3">Find Projects By Title</Text>
       <InputGroup bg='white' mb='5'>
         <Input placeholder='Search by Tag' value={searchTitle} onChange={(e) => setSearchTitle(e.target.value)}/>
-        <InputRightElement onClick={getProjectsByTitle}>
+        <InputRightElement onClick={getProjectsByTitle} cursor="pointer">
           <SearchIcon />
         </InputRightElement>
       </InputGroup>
@@ -49,7 +49,7 @@ function Home({ projectContract, easSDK }) {
       <Text fontWeight="bold" mt="2">Find Projects By Tags</Text>
       <InputGroup bg='white'>
         <Input placeholder='Search by Tag' value={search} onChange={(e) => setSearch(e.target.value)}/>
-        <InputRightElement onClick={getProjectsByTag}>
+        <InputRightElement onClick={getProjectsByTag} cursor="pointer">
           <SearchIcon />
         </InputRightElement>
       </InputGroup>
